@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ../
+    ports:
+    - 3000:3000
+    depends_on:
+      - db
+    env_file:
+      - ../.env.docker
+
+  db:
+    image: redis:7-alpine
+    ports:
+    - 6379:6379
+
+networks:
+  default:
