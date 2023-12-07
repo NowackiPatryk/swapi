@@ -11,10 +11,9 @@ export class AppConfigEnvs extends ModuleConfig {
 
 @Injectable()
 export class AppConfig {
-  private readonly config: AppConfigEnvs;
+  private readonly config: AppConfigEnvs = new AppConfigEnvs();;
 
   constructor(private readonly configService: ConfigService) {
-    this.config = new AppConfigEnvs();
     this.config.PORT = this.configService.get('PORT');
 
     this.config.validate();

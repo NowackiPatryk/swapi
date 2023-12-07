@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { CoreModule } from '../core/core.module';
 import { ApiModule } from '../api/api.module';
 import { DomainModule } from '../domain/domain.module';
-import { AppConfigModule } from './config/app-config.module';
+import { AppConfig } from './config/app-config';
 
 @Module({
-  imports: [CoreModule, ApiModule, DomainModule, AppConfigModule],
+  providers: [AppConfig],
+  imports: [CoreModule, ApiModule, DomainModule],
 })
 export class AppModule {}
