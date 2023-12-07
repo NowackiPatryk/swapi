@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
 import { AppModule } from '../src/app/app.module';
+import request from 'supertest-graphql';
+import gql from 'graphql-tag';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -15,10 +16,15 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('Should return hello world', async () => {
+    const result = await request<{ hello: string }>(app.getHttpServer()).query(
+      gql`
+        query {
+          hello
+        }
+      `,
+    );
+
+    expect(result.data.hello).toBe('Hello World!');
   });
 });
