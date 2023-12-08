@@ -5,9 +5,7 @@ import { SwapiUrlBuilder } from './url-builder/url.builder';
 
 @Injectable()
 export class SWApiClient {
-  constructor(private readonly httpClientService: HttpClientService) {
-    this.getPeopleById(1).then((data) => console.log(data));
-  }
+  constructor(private readonly httpClientService: HttpClientService) {}
 
   async getAllPeople(page?: number): Promise<PeopleListResponse> {
     const urlBuilder = SwapiUrlBuilder.get().forPeople();
