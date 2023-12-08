@@ -9,8 +9,12 @@ export class SWApiClient {
     this.getPeopleById(1).then((data) => console.log(data));
   }
 
-  async getAllPeople(): Promise<PeopleListResponse> {
-    const url = SwapiUrlBuilder.get().forPeople().getUrl();
+  async getAllPeople(page?: number): Promise<PeopleListResponse> {
+    const urlBuilder = SwapiUrlBuilder.get().forPeople();
+
+    if (page) urlBuilder.withPage(page);
+
+    const url = urlBuilder.getUrl();
     return this.httpClientService.get<PeopleListResponse>(url);
   }
 
