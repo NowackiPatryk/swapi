@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { GatewayModule } from './resolvers/gateway.module';
+import { GatewayModule } from '../gateway/gateway.module';
 
 @Module({
   imports: [
@@ -9,7 +9,6 @@ import { GatewayModule } from './resolvers/gateway.module';
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
-    GatewayModule,
   ],
 })
 export class GraphqlModule {}
