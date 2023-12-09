@@ -15,6 +15,16 @@ describe('SwapiUrlBuilder', () => {
     expect(result).toBe(expected);
   });
 
+  it('Should return correct URL for list including search', () => {
+    const expected = 'https://swapi.dev/api/people?search=Luke';
+    const result = SwapiUrlBuilder.get()
+      .forPeople()
+      .withSearch('Luke')
+      .getUrl();
+
+    expect(result).toBe(expected);
+  });
+
   it('Should return correct URL for getting single resource including ID', () => {
     const expected = 'https://swapi.dev/api/people/1';
     const result = SwapiUrlBuilder.get().forPeople().withId(1).getUrl();

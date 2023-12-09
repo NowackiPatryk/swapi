@@ -1,5 +1,5 @@
 export interface Pagination {
-  page: number,
+  page: number;
 }
 
 export interface Paginated<T> {
@@ -27,5 +27,20 @@ export interface PeopleResponse {
   edited: string;
   url: string;
 }
+
+export type PeopleFilters = Partial<
+  Pick<
+    PeopleResponse,
+    | 'name'
+    | 'height'
+    | 'mass'
+    | 'hair_color'
+    | 'skin_color'
+    | 'eye_color'
+    | 'birth_year'
+    | 'gender'
+    | 'homeworld'
+  >
+>;
 
 export type PeopleListResponse = Paginated<PeopleResponse>;

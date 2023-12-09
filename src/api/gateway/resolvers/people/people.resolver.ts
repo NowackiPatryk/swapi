@@ -4,21 +4,15 @@ import {
   PeopleListGraphql,
 } from '../../../graphql/models/people.graphql';
 import { PeopleService } from '../../../../domain/people/people.service';
+import { GetAllPeopleInput } from './inputs/get-all-people.input';
 
 @Resolver()
 export class PeopleResolver {
   constructor(private readonly peopleService: PeopleService) {}
 
   @Query(() => PeopleListGraphql)
-  async getAllPeople(
-    @Args('page', {
-      type: () => Int,
-      description: 'Page number used for pagination.',
-      nullable: true,
-    })
-    page?: number,
-  ) {
-    return this.peopleService.getAllPeople(page);
+  async getAllPeople(@Args('GetAllPeopleInput') input: GetAllPeopleInput) {
+    return this.peopleService.getAllPeople(input);
   }
 
   @Query(() => PeopleGraphql)

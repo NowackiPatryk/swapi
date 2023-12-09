@@ -30,11 +30,30 @@ describe('People (e2e)', () => {
   });
 
   it('Should return list of people by page', async () => {
-    const { response, data } = await getAllPeopleQuery(app, 2);
+    const { response, data } = await getAllPeopleQuery(app, { page: 2 });
     expect(response.status).toEqual(HttpStatus.OK);
     expect(data.getAllPeople).toEqual(
       expect.objectContaining(peopleListResponse),
     );
+  });
+
+  it('Should return list of people filtered by search', async () => {
+    const { response, data } = await getAllPeopleQuery(app, {
+      search: 'Darth',
+    });
+    expect(response.status).toEqual(HttpStatus.OK);
+    expect(data.getAllPeople).toEqual(
+      expect.objectContaining(peopleListResponse),
+    );
+  });
+
+  it('Should throw bad request if page and filters used at the same time', async () => {
+    const { errors } = await getAllPeopleQuery(app, {
+      search: 'Darth',
+      page: 1,
+    });
+    expect(errors).toBeDefined();
+    expect(errors[0].extensions.statusCode === 400);
   });
 
   it('Should return people by id', async () => {

@@ -1,0 +1,1 @@
+export class UnallowedFiltersException extends Error {};
