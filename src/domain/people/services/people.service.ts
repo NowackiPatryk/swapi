@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { GetAllPeopleParams, SWApiClient } from '../../swapi/swapi.client';
+import { FilterListParams, SWApiClient } from '../../swapi/swapi.client';
 import { UnallowedFiltersException } from '../exceptions/unallowed-filters.exception';
 import { PeopleCacheService } from './people-cache.service';
 
@@ -10,7 +10,7 @@ export class PeopleService {
     private readonly cache: PeopleCacheService,
   ) {}
 
-  async getAllPeople(params: GetAllPeopleParams) {
+  async getAllPeople(params: FilterListParams) {
     const { page, search } = params;
 
     if (page && search) {

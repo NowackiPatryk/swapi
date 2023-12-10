@@ -1,37 +1,35 @@
 import {
-  CACHE_MODULE_OPTIONS,
-  CacheModule,
-  CacheStore,
+  CacheModule, CacheStore,
 } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
-import { redisStore } from 'cache-manager-redis-store';
 import { RedisClientOptions } from 'redis';
-import { DatabaseConfig } from '../database/config/database-config';
-import { DatabaseModule } from '../database/database.module';
+import { StoreConfig } from './store/config/store-config';
 import { CachingService } from './services/caching.service';
+import { StoreModule } from './store/store.module';
+import { redisStore } from 'cache-manager-redis-store';
 
 const HOURS24 = 24 * 1000 * 60 * 60;
 
 @Module({
   imports: [
     CacheModule.registerAsync<RedisClientOptions>({
-      imports: [DatabaseModule],
-      inject: [DatabaseConfig],
-      useFactory: async (databaseConfig: DatabaseConfig) => {
+      imports: [StoreModule],
+      inject: [StoreConfig],
+      useFactory: async (storeConfig: StoreConfig) => {
         return {
           isGlobal: true,
           // store: (await redisStore({
           //   legacyMode: true,
           //   socket: {
-          //     host: databaseConfig.databaseHost,
-          //     port: +databaseConfig.databasePort,
+          //     host: storeConfig.databaseHost,
+          //     port: +storeConfig.databasePort,
           //   },
           // })) as unknown as CacheStore,
           ttl: HOURS24,
         };
       },
     }),
-    DatabaseModule,
+    StoreModule,
   ],
 
   providers: [CachingService],

@@ -1,13 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { PeopleModule } from '../../src/domain/people/people.module';
-import { PeopleResolver } from '../../src/api/gateway/resolvers/people/people.resolver';
+import { PeopleResolver } from '../../src/api/graphql/resolvers/people/people.resolver';
 import { getAllPeopleQuery } from './queries/get-all-people.query';
 import { GraphqlModule } from '../../src/api/graphql/graphql.module';
 import { peopleListResponse } from './expected-responses/people-list.response';
 import { peopleResponse } from './expected-responses/people.response';
 import { getPeopleByIdQuery } from './queries/get-people-by-id.query';
-import { DatabaseModule } from '../../src/core/database/database.module';
 import { CachingModule } from '../../src/core/cache/caching.module';
 import { ConfigurationModule } from '../../src/core/config/config.module';
 
