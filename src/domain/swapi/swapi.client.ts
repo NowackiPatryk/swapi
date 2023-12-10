@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpClientService } from '../../core/http-client/services/http-client.service';
-import { PeopleFilters, PeopleListResponse, PeopleResponse } from './types';
+import { PeopleListResponse, PeopleResponse } from './types';
 import { SwapiUrlBuilder } from './url-builder/url.builder';
 
 export type GetAllPeopleParams = {

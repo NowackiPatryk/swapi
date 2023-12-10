@@ -11,6 +11,6 @@ export class GraphqlExceptionFilter implements GqlExceptionFilter {
       throw new BadRequestException(exception.message);
     }
 
-    return exception;
+    throw exception;
   }
 }

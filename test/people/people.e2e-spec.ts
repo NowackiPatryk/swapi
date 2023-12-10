@@ -7,13 +7,16 @@ import { GraphqlModule } from '../../src/api/graphql/graphql.module';
 import { peopleListResponse } from './expected-responses/people-list.response';
 import { peopleResponse } from './expected-responses/people.response';
 import { getPeopleByIdQuery } from './queries/get-people-by-id.query';
+import { DatabaseModule } from '../../src/core/database/database.module';
+import { CachingModule } from '../../src/core/cache/caching.module';
+import { ConfigurationModule } from '../../src/core/config/config.module';
 
 describe('People (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [GraphqlModule, PeopleModule],
+      imports: [ConfigurationModule, CachingModule, GraphqlModule, PeopleModule],
       providers: [PeopleResolver],
     }).compile();
 
