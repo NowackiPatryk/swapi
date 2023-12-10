@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsNumberString, IsString } from 'class-validator';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ModuleConfig } from '../../config/module-config.abstract';
+import { ModuleConfig } from '../../../config/module-config.abstract';
 
-export class DatabaseConfigEnvs extends ModuleConfig {
+export class StoreConfigEnvs extends ModuleConfig {
   @IsNotEmpty()
   @IsString()
   REDIS_HOST: string;
@@ -14,8 +14,8 @@ export class DatabaseConfigEnvs extends ModuleConfig {
 }
 
 @Injectable()
-export class DatabaseConfig {
-  private readonly config: DatabaseConfigEnvs = new DatabaseConfigEnvs();
+export class StoreConfig {
+  private readonly config: StoreConfigEnvs = new StoreConfigEnvs();
 
   constructor(private readonly configService: ConfigService) {
     this.config.REDIS_PORT = this.configService.get('REDIS_PORT');

@@ -8,6 +8,13 @@ describe('SwapiUrlBuilder', () => {
     expect(result).toBe(expected);
   });
 
+  it('Should return correct URL for all list of films', () => {
+    const expected = `https://swapi.dev/api/films`;
+    const result = SwapiUrlBuilder.get().forFilms().getUrl();
+
+    expect(result).toBe(expected);
+  });
+
   it('Should return correct URL for list including page', () => {
     const expected = 'https://swapi.dev/api/people?page=1';
     const result = SwapiUrlBuilder.get().forPeople().withPage(1).getUrl();

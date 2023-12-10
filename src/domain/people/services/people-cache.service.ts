@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CachingService } from '../../../core/cache/services/caching.service';
 import { PeopleListResponse, PeopleResponse } from '../../swapi/types';
-import { GetAllPeopleParams } from '../../swapi/swapi.client';
+import { FilterListParams } from '../../swapi/swapi.client';
 
 export type CachedPeopleListResponse = {
-  recentlyUsedFilters: GetAllPeopleParams;
+  recentlyUsedFilters: FilterListParams;
   response: PeopleListResponse;
 };
 
@@ -62,7 +62,7 @@ export class PeopleCacheService {
   }
 
   async getPeopleListResponse(
-    filters: GetAllPeopleParams,
+    filters: FilterListParams,
   ): Promise<PeopleListResponse> {
     const { page, search } = filters;
 

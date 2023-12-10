@@ -2,7 +2,7 @@ import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import {
   PeopleGraphql,
   PeopleListGraphql,
-} from '../../../graphql/models/people.graphql';
+} from '../../models/people.graphql';
 import { PeopleService } from '../../../../domain/people/services/people.service';
 import { GetAllPeopleInput } from './inputs/get-all-people.input';
 

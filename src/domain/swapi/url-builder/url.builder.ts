@@ -2,9 +2,10 @@ import * as url from 'url';
 
 enum PossibleResources {
   PEOPLE = 'people',
+  FILMS = 'films',
 }
 
-type ResourceBuildingStep = Pick<SwapiUrlBuilder, 'forPeople'>;
+type ResourceBuildingStep = Pick<SwapiUrlBuilder, 'forPeople' | 'forFilms'>;
 type FilterBuildingStep = Pick<
   SwapiUrlBuilder,
   'getUrl' | 'withId' | 'withPage' | 'withSearch'
@@ -17,7 +18,8 @@ type GetAllBuildingStep = Pick<
 type FinalBuildingStep = Pick<SwapiUrlBuilder, 'getUrl'>;
 
 export class SwapiUrlBuilder {
-  private readonly baseUrl = 'https://swapi.dev/api';
+  private readonly baseUrl = 'https://swapi.dev/api/';
+  private resource: PossibleResources | null = null;
   private path = '';
   private query = {};
 
@@ -26,7 +28,12 @@ export class SwapiUrlBuilder {
   }
 
   forPeople(): FilterBuildingStep {
-    this.path += `/${PossibleResources.PEOPLE}`;
+    this.resource = PossibleResources.PEOPLE;
+    return this;
+  }
+
+  forFilms(): FilterBuildingStep {
+    this.resource = PossibleResources.FILMS;
     return this;
   }
 
@@ -48,8 +55,12 @@ export class SwapiUrlBuilder {
   getUrl(): string {
     return url.format({
       host: this.baseUrl,
-      pathname: this.path,
+      pathname: this.getFullPath(),
       query: this.query,
     });
+  }
+
+  private getFullPath() {
+    return `${this.resource}` + (this.path.length ? `${this.path}` : '');
   }
 }
