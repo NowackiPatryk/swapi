@@ -10,10 +10,7 @@ export class StatisticsService {
   constructor(
     private readonly filmsService: FilmService,
     private readonly peopleService: PeopleService,
-  ) {
-    // this.getPairsOfUniqueWords();
-    this.getMostMentionedPeopleNames();
-  }
+  ) {}
 
   async getPairsOfUniqueWords(): Promise<WordsStatistics> {
     const allFilms = await this.filmsService.getAllFilms();
@@ -91,108 +88,23 @@ export class StatisticsService {
   }
 
   private async getAllPeopleNames() {
-    // const responses: PeopleListResponse[] = [];
-    // const allTaken = () => responses.some((response) => response.next === null);
-    // let currentPage = 1;
+    const responses: PeopleListResponse[] = [];
+    const allTaken = () => responses.some((response) => response.next === null);
+    let currentPage = 1;
 
-    // while (!allTaken()) {
-    //   const response = await this.peopleService.getAllPeople({
-    //     page: currentPage,
-    //   });
+    while (!allTaken()) {
+      const response = await this.peopleService.getAllPeople({
+        page: currentPage,
+      });
 
-    //   responses.push(response);
-    //   currentPage++;
-    // }
+      responses.push(response);
+      currentPage++;
+    }
 
-    // const fullNames = responses
-    //   .map((response) => response.results)
-    //   .map((results) => results.map((result) => result.name))
-    //   .flat();
-
-    const fullNames = [
-      'Luke Skywalker',
-      'C-3PO',
-      'R2-D2',
-      'Darth Vader',
-      'Leia Organa',
-      'Owen Lars',
-      'Beru Whitesun lars',
-      'R5-D4',
-      'Biggs Darklighter',
-      'Obi-Wan Kenobi',
-      'Anakin Skywalker',
-      'Wilhuff Tarkin',
-      'Chewbacca',
-      'Han Solo',
-      'Greedo',
-      'Jabba Desilijic Tiure',
-      'Wedge Antilles',
-      'Jek Tono Porkins',
-      'Yoda',
-      'Palpatine',
-      'Boba Fett',
-      'IG-88',
-      'Bossk',
-      'Lando Calrissian',
-      'Lobot',
-      'Ackbar',
-      'Mon Mothma',
-      'Arvel Crynyd',
-      'Wicket Systri Warrick',
-      'Nien Nunb',
-      'Qui-Gon Jinn',
-      'Nute Gunray',
-      'Finis Valorum',
-      'Padmé Amidala',
-      'Jar Jar Binks',
-      'Roos Tarpals',
-      'Rugor Nass',
-      'Ric Olié',
-      'Watto',
-      'Sebulba',
-      'Quarsh Panaka',
-      'Shmi Skywalker',
-      'Darth Maul',
-      'Bib Fortuna',
-      'Ayla Secura',
-      'Ratts Tyerel',
-      'Dud Bolt',
-      'Gasgano',
-      'Ben Quadinaros',
-      'Mace Windu',
-      'Ki-Adi-Mundi',
-      'Kit Fisto',
-      'Eeth Koth',
-      'Adi Gallia',
-      'Saesee Tiin',
-      'Yarael Poof',
-      'Plo Koon',
-      'Mas Amedda',
-      'Gregar Typho',
-      'Cordé',
-      'Cliegg Lars',
-      'Poggle the Lesser',
-      'Luminara Unduli',
-      'Barriss Offee',
-      'Dormé',
-      'Dooku',
-      'Bail Prestor Organa',
-      'Jango Fett',
-      'Zam Wesell',
-      'Dexter Jettster',
-      'Lama Su',
-      'Taun We',
-      'Jocasta Nu',
-      'R4-P17',
-      'Wat Tambor',
-      'San Hill',
-      'Shaak Ti',
-      'Grievous',
-      'Tarfful',
-      'Raymus Antilles',
-      'Sly Moore',
-      'Tion Medon',
-    ];
+    const fullNames = responses
+      .map((response) => response.results)
+      .map((results) => results.map((result) => result.name))
+      .flat();
 
     return fullNames.map((name) => name.split(/[-_ ]+/)[0]);
   }
