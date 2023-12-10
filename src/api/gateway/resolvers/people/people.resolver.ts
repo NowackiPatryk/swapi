@@ -3,7 +3,7 @@ import {
   PeopleGraphql,
   PeopleListGraphql,
 } from '../../../graphql/models/people.graphql';
-import { PeopleService } from '../../../../domain/people/people.service';
+import { PeopleService } from '../../../../domain/people/services/people.service';
 import { GetAllPeopleInput } from './inputs/get-all-people.input';
 
 @Resolver()

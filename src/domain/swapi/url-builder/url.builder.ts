@@ -1,5 +1,4 @@
 import * as url from 'url';
-import { PeopleFilters } from '../types';
 
 enum PossibleResources {
   PEOPLE = 'people',

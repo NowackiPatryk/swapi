@@ -28,19 +28,4 @@ export interface PeopleResponse {
   url: string;
 }
 
-export type PeopleFilters = Partial<
-  Pick<
-    PeopleResponse,
-    | 'name'
-    | 'height'
-    | 'mass'
-    | 'hair_color'
-    | 'skin_color'
-    | 'eye_color'
-    | 'birth_year'
-    | 'gender'
-    | 'homeworld'
-  >
->;
-
 export type PeopleListResponse = Paginated<PeopleResponse>;
